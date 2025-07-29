@@ -3,6 +3,7 @@
 
 # testing
 /coverage
+/test-results/
 
 # production
 /build
@@ -34,3 +35,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.eslintcache
