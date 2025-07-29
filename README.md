@@ -115,7 +115,7 @@ Completed and deployed in under 4 days.
 -Ki W. (@kiwi-223)
 -Eric C (@EricCarverCoding in discord, @EricCarverInWI Github)
 -Russell C (@russllist)
--Adrian C (@acarvjl in discord, acarvjl Github) git
+-Adrian C (@acarvjl in discord, acarvjl Github)
 
 ---
 
