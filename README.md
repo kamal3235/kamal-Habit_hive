@@ -44,7 +44,7 @@ npm --version
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Joy-of-Coding/TechJoy-Challenge-Morning.git
    cd TechJoy-Challenge-Morning
    ```
 
