@@ -1,3 +1,16 @@
+# dependencies
+/node_modules
+
+# testing
+/coverage
+/test-results/
+
+# production
+/build
+
+# vscode settings
+.vscode
+
 # Logs
 logs
 *.log
@@ -22,3 +35,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.eslintcache
