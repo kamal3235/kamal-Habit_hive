@@ -31,6 +31,7 @@ Before you begin, ensure you have the following installed on your machine:
 - **npm** (comes with Node.js)
 
 You can check your versions by running:
+
 ```bash
 node --version
 npm --version
@@ -41,12 +42,14 @@ npm --version
 ## Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd TechJoy-Challenge-Morning
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
@@ -61,6 +64,7 @@ npm --version
 ## Running the Project Locally
 
 Start the development server with hot reload:
+
 ```bash
 npm run dev
 ```
@@ -70,11 +74,13 @@ The application will be available at `http://localhost:5173` (or the next availa
 ### Testing
 
 Run unit tests:
+
 ```bash
 npm run test:unit
 ```
 
 Run tests with coverage:
+
 ```bash
 npm run test:coverage
 ```
@@ -82,9 +88,11 @@ npm run test:coverage
 ### Code Quality
 
 Format code with Prettier:
+
 ```bash
 npm run format
 ```
+
 ---
 
 ## Deployment
