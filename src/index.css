@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* Reset and base styles */
 * {
   margin: 0;
@@ -27,6 +29,10 @@ body {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in;
 }
 
 /* Custom scrollbar */
