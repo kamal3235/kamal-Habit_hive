@@ -1,4 +1,5 @@
 # TechJoy-Challenge-Morning
+
 ## Project Summary
 
 **Vibe Code** is a web app created in just **4 days** as part of a hackathon challenge to build something **SLC: Simple, Lovable, and Complete**, inspired by the [SLC philosophy](https://longform.asmartbear.com/slc/).
@@ -13,7 +14,7 @@ Built under the theme **"Transform Together,"** this project is a testament to w
 
 ## Tech Stack
 
-- **React** – For building composable, reactive UI components  
+- **React** – For building composable, reactive UI components
 - **JavaScript** – For expressive, client-side logic and functionality
 
 ---
@@ -26,18 +27,19 @@ Completed and deployed in under 4 days.
 
 ## Highlights
 
-- Followed the SLC principle: delivered a real, usable, lovable product  
-- Built by vibing — no rigid specs, just shared creative energy  
-- Emphasized iteration, simplicity, and joy in coding  
+- Followed the SLC principle: delivered a real, usable, lovable product
+- Built by vibing — no rigid specs, just shared creative energy
+- Emphasized iteration, simplicity, and joy in coding
 - Explored how tech can **transform** teams and ideas when built together
 
 ---
 
-
 ## Contributors
 
 -Ki W. (@kiwi-223)
--Eric C (@EricCarverCoding in discord, @EricCarverInWI Github )
+-Eric C (@EricCarverCoding in discord, @EricCarverInWI Github)
+-Russell C (@russllist)
+-Adrian C (@acarvjl in discord, acarvjl Github)
 
 ---
 
