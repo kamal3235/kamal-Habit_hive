@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
-  const [entries, setEntries] = useState([]);
+  const [entries, setEntries] = useLocalStorage("habit-hive-entries", []);
   const [hours, setHours] = useState("");
   const [showMosaic, setShowMosaic] = useState(false);
 
@@ -23,6 +24,16 @@ function App() {
 
     // Hide mosaic after 3 seconds
     setTimeout(() => setShowMosaic(false), 3000);
+  };
+
+  const handleClearData = () => {
+    if (
+      window.confirm(
+        "Are you sure you want to clear all your coding data? This cannot be undone.",
+      )
+    ) {
+      setEntries([]);
+    }
   };
 
   // Calculate progress metrics
@@ -114,9 +125,20 @@ function App() {
           </form>
 
           <section className="mt-8">
-            <h2 className="text-yellow-400 text-center text-2xl">
-              Your Coding Hive
-            </h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-yellow-400 text-center text-2xl">
+                Your Coding Hive
+              </h2>
+              {entries.length > 0 && (
+                <button
+                  onClick={handleClearData}
+                  className="text-red-400 hover:text-red-300 text-sm underline"
+                  title="Clear all data"
+                >
+                  Clear Data
+                </button>
+              )}
+            </div>
             <div
               className="grid grid-cols-auto-fit gap-4 mt-4"
               style={{
