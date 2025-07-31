@@ -35,8 +35,8 @@ function App() {
     setHours("");
     setShowMosaic(true);
 
-    // Hide mosaic after 3 seconds
-    setTimeout(() => setShowMosaic(false), 3000);
+    // Hide mosaic after 12 seconds
+    setTimeout(() => setShowMosaic(false), 12000);
   };
 
   const handleClearData = () => {
@@ -100,7 +100,14 @@ function App() {
             <div className="text-yellow-400 text-sm">
               Keep building your hive! 🐝
             </div>
+            <button
+              onClick={() => setShowMosaic(false)}
+              className="mt-2 px-4 py-2 rounded-lg bg-yellow-400 text-black font-bold hover:bg-yellow-300 transition"
+            >
+              Close
+            </button>
           </div>
+          <br></br>
         </div>
       )}
 
