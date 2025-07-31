@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import MosaicReveal from "./components/MosaicReveal";
+import reactLogo from "./assets/react.svg";
 
 function App() {
   const [entries, setEntries] = useLocalStorage("habit-hive-entries", []);
@@ -85,17 +87,7 @@ function App() {
               </div>
             </div>
 
-            {/* Progress Mosaic */}
-            <div className="grid grid-cols-6 gap-2 mb-5">
-              {Array.from({ length: 30 }, (_, i) => (
-                <div
-                  key={i}
-                  className={`w-5 h-5 rounded-full border border-yellow-400 ${
-                    i < totalSessions ? "opacity-100" : "opacity-30"
-                  }`}
-                />
-              ))}
-            </div>
+            <MosaicReveal imageSrc={reactLogo} />
 
             <div className="text-yellow-400 text-sm">
               Keep building your hive! 🐝
