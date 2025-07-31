@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 
 // Placeholder components
-const Dashboard = () => <div>Dashboard Page</div>;
-const Coding = () => <div>Coding Habit Page</div>;
-const Physical = () => <div>Physical Habit Page</div>;
-const MentalHealth = () => <div>Mental Health Habit Page</div>;
+const Dashboard = () => <div></div>;
+const Coding = () => <div></div>;
+const Physical = () => <div></div>;
+const MentalHealth = () => <div></div>;
 
 function App() {
   const [entries, setEntries] = useLocalStorage("habit-hive-entries", []);
@@ -124,11 +124,7 @@ function App() {
         <p className="text-white mt-2">
           Track your coding hours and build your hive!
         </p>
-      </header>
-
-      <div className="flex justify-center">
-        <main className="justify-center items-center text-center max-w-lg mx-auto my-8 bg-gray-900 rounded-2xl p-6 shadow-2xl shadow-black/50">
-          {/* Put nav bar here? */}
+        {/* Put nav bar here? */}
           <Router>
             <NavBar />
             <div className="flex justify-center">
@@ -141,6 +137,10 @@ function App() {
               </Routes>
             </div>
           </Router>
+      </header>
+
+      <div className="flex justify-center">
+        <main className="justify-center items-center text-center max-w-lg mx-auto my-8 bg-gray-900 rounded-2xl p-6 shadow-2xl shadow-black/50">
 
           {/* Today's Status */}
           <div className="mb-4 p-3 rounded-lg bg-gray-800 border border-yellow-400">
