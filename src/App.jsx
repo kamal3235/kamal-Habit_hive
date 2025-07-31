@@ -28,7 +28,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!hours) return;
+    if (hours (hoursValue < 0 && hoursValue > 24)) return;
 
     const newEntry = {
       hours: parseFloat(hours),
@@ -228,8 +228,8 @@ function App() {
                     margin: "0 auto",
                   }}
                 >
-                  <div className="text-2xl mb-1">🐝</div>
-                  <div className="text-sm font-bold">{entry.hours}h</div>
+                  {/* <div className="text-2xl mb-1">🐝</div> */}
+                  <div className="text-sm font-bold">{entry.hours}h 🐝</div>
                   {entry.date && (
                     <div className="text-xs opacity-75 mt-1">
                       {new Date(entry.date).toLocaleDateString()}
