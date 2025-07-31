@@ -28,7 +28,7 @@ describe("NavBar", () => {
 
     // Check href attributes directly
     expect(screen.getByText("Dashboard").closest("a").getAttribute("href")).toBe(
-      "/",
+      "/q",
     );
     expect(screen.getByText("Coding").closest("a").getAttribute("href")).toBe(
       "/coding",
