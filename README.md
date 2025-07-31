@@ -117,7 +117,6 @@ Completed and deployed in under 4 days.
 -Russell C (@russllist)
 -Adrian C (@acarvjl in discord, acarvjl Github)
 -Rebecca A. Stone (@beckstone on discord and Github)
-
 ---
 
 > "Transform Together" by keeping it **Simple**, making it **Lovable**, and finishing it **Complete**.
