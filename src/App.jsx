@@ -1,5 +1,13 @@
 import React, { useState } from "react";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import NavBar from "./NavBar";
+
+// Placeholder components
+const Dashboard = () => <div>Dashboard Page</div>;
+const Coding = () => <div>Coding Habit Page</div>;
+const Physical = () => <div>Physical Habit Page</div>;
+const MentalHealth = () => <div>Mental Health Habit Page</div>;
 
 function App() {
   const [entries, setEntries] = useLocalStorage("habit-hive-entries", []);
@@ -113,6 +121,20 @@ function App() {
 
       <div className="flex justify-center">
         <main className="justify-center items-center text-center max-w-lg mx-auto my-8 bg-gray-900 rounded-2xl p-6 shadow-2xl shadow-black/50">
+          {/* Put nav bar here? */}
+          <Router>
+            <NavBar />
+            <div className="flex justify-center">
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/coding" element={<Coding />} />
+                <Route path="/physical" element={<Physical />} />
+                <Route path="/mental" element={<MentalHealth />} />
+                {/* Add more routes as needed  */}
+              </Routes>
+            </div>
+          </Router>
+
           {/* Today's Status */}
           <div className="mb-4 p-3 rounded-lg bg-gray-800 border border-yellow-400">
             <div className="text-yellow-400 font-semibold">
