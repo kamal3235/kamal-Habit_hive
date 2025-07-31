@@ -12,11 +12,11 @@ describe("NavBar", () => {
       </MemoryRouter>,
     );
 
-    // These should match the names in habitPages
-    expect(screen.getByText("Dashboard")).toBeInTheDocument();
-    expect(screen.getByText("Coding")).toBeInTheDocument();
-    expect(screen.getByText("Physical")).toBeInTheDocument();
-    expect(screen.getByText("Mental Health")).toBeInTheDocument();
+    // Check that each link exists in the DOM
+    expect(screen.getByText("Dashboard")).not.toBeNull();
+    expect(screen.getByText("Coding")).not.toBeNull();
+    expect(screen.getByText("Physical")).not.toBeNull();
+    expect(screen.getByText("Mental Health")).not.toBeNull();
   });
 
   it("links have correct hrefs", () => {
@@ -26,20 +26,17 @@ describe("NavBar", () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByText("Dashboard").closest("a")).toHaveAttribute(
-      "href",
+    // Check href attributes directly
+    expect(screen.getByText("Dashboard").closest("a").getAttribute("href")).toBe(
       "/",
     );
-    expect(screen.getByText("Coding").closest("a")).toHaveAttribute(
-      "href",
+    expect(screen.getByText("Coding").closest("a").getAttribute("href")).toBe(
       "/coding",
     );
-    expect(screen.getByText("Physical").closest("a")).toHaveAttribute(
-      "href",
+    expect(screen.getByText("Physical").closest("a").getAttribute("href")).toBe(
       "/physical",
     );
-    expect(screen.getByText("Mental Health").closest("a")).toHaveAttribute(
-      "href",
+    expect(screen.getByText("Mental Health").closest("a").getAttribute("href")).toBe(
       "/mental",
     );
   });
