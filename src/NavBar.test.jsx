@@ -27,17 +27,17 @@ describe("NavBar", () => {
     );
 
     // Check href attributes directly
-    expect(screen.getByText("Dashboard").closest("a").getAttribute("href")).toBe(
-      "/",
-    );
+    expect(
+      screen.getByText("Dashboard").closest("a").getAttribute("href"),
+    ).toBe("/");
     expect(screen.getByText("Coding").closest("a").getAttribute("href")).toBe(
       "/coding",
     );
     expect(screen.getByText("Physical").closest("a").getAttribute("href")).toBe(
       "/physical",
     );
-    expect(screen.getByText("Mental Health").closest("a").getAttribute("href")).toBe(
-      "/mental",
-    );
+    expect(
+      screen.getByText("Mental Health").closest("a").getAttribute("href"),
+    ).toBe("/mental");
   });
 });
