@@ -12,7 +12,7 @@ const habitPages = [
 
 const NavBar = () => {
   return (
-    <nav className="flex gap-6 justify-center bg-black border-b-2 border-yellow-400">
+    <nav className="flex gap-6 px-2 sm:px-4 justify-center bg-black border-b-2 border-yellow-400">
       {habitPages.map((page) => (
         <NavLink
           key={page.path}

@@ -203,15 +203,15 @@ function App() {
               )}
             </div>
             <div
-              className="grid grid-cols-auto-fit gap-4 mt-4"
+              className="grid gap-2 sm:gap-4 mt-4"
               style={{
-                gridTemplateColumns: "repeat(auto-fit, minmax(80px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fit, minmax(64px, 1fr))",
               }}
             >
               {entries.map((entry, idx) => (
                 <div
                   key={idx}
-                  className={`hexagon p-4 text-center shadow-lg font-bold text-lg ${
+                  className={`hexagon p-2 sm:p-4 text-center shadow-lg font-bold text-xs sm:text-sm md:text-lg ${
                     idx % 2 === 0
                       ? "bg-yellow-400 text-black"
                       : "bg-black text-yellow-400"
@@ -219,8 +219,8 @@ function App() {
                   style={{
                     clipPath:
                       "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-                    width: "80px",
-                    height: "92px",
+                    width: "64px",
+                    height: "74px",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
@@ -228,8 +228,10 @@ function App() {
                     margin: "0 auto",
                   }}
                 >
-                  <div className="text-xl mb-1 leading-tight">🐝</div>
-                  <div className="text-xs font-bold leading-tight">{entry.hours}h</div>
+                  {/* <div className="text-md sm:text-xl mb-1 leading-tight">🐝</div> */}
+                  <div className="text-xs font-bold leading-tight">
+                    {entry.hours}h 🐝
+                  </div>
                   {entry.date && (
                     <div className="text-xs opacity-75 mt-1 leading-tight">
                       {new Date(entry.date).toLocaleDateString()}
