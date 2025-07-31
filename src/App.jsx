@@ -1,14 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocalStorage } from "./hooks/useLocalStorage";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NavBar from "./NavBar";
 import Header from "./Header";
-
-// Placeholder components
-const Dashboard = () => <div></div>;
-const Coding = () => <div></div>;
-const Physical = () => <div></div>;
-const MentalHealth = () => <div></div>;
 
 function App() {
   const [entries, setEntries] = useLocalStorage("habit-hive-entries", []);
@@ -29,7 +21,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (hours (hoursValue < 0 && hoursValue > 24)) return;
+    if (!hours) return;
 
     const newEntry = {
       hours: parseFloat(hours),
@@ -120,11 +112,10 @@ function App() {
         </div>
       )}
 
-      <Header/>
+      <Header />
 
       <div className="flex justify-center">
         <main className="justify-center items-center text-center max-w-lg mx-auto my-8 bg-gray-900 rounded-2xl p-6 shadow-2xl shadow-black/50">
-
           {/* Today's Status */}
           <div className="mb-4 p-3 rounded-lg bg-gray-800 border border-yellow-400">
             <div className="text-yellow-400 font-semibold">
