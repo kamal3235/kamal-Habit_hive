@@ -228,10 +228,10 @@ function App() {
                     margin: "0 auto",
                   }}
                 >
-                  <div className="text-2xl mb-1">🐝</div>
-                  <div className="text-sm font-bold">{entry.hours}h</div>
+                  <div className="text-xl mb-1 leading-tight">🐝</div>
+                  <div className="text-xs font-bold leading-tight">{entry.hours}h</div>
                   {entry.date && (
-                    <div className="text-xs opacity-75 mt-1">
+                    <div className="text-xs opacity-75 mt-1 leading-tight">
                       {new Date(entry.date).toLocaleDateString()}
                     </div>
                   )}
