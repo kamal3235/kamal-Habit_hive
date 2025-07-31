@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import beehive from "../assets/beehive.png"; // Adjust the path as necessary
 
 const MosaicReveal = ({
   imageSrc,
@@ -60,7 +61,7 @@ const MosaicReveal = ({
       <div
         className="absolute inset-0 bg-cover bg-center rounded-lg"
         style={{
-          backgroundImage: `url(${imageSrc})`,
+          backgroundImage: `url(${beehive})`,
           filter: "blur(2px) brightness(0.3)",
         }}
       />

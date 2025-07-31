@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
+import MosaicReveal from "./components/MosaicReveal";
+import mental from "./assets/mental.jpg"; // Adjust the path as necessary
 
 // Placeholder components
 const Dashboard = () => <div>Dashboard Page</div>;
@@ -36,7 +38,7 @@ function App() {
         hour: "2-digit",
         minute: "2-digit",
       }),
-      date: new Date().toDateString(), // Add date tracking
+      date: new Date().toDateString(),
     };
 
     setEntries([...entries, newEntry]);
@@ -93,7 +95,14 @@ function App() {
               </div>
             </div>
 
-            <MosaicReveal imageSrc={reactLogo} />
+            <MosaicReveal
+              imageSrc={mental}
+              filledSquares={entries.length}
+              onComplete={() => {
+                setTimeout(() => setShowMosaic(false), 3000);
+              }}
+              gridSize={4}
+            />
 
             <div className="text-yellow-400 text-sm">
               Keep building your hive! 🐝
