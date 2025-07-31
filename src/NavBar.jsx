@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom";
 
 // Define menu items and routes
 const habitPages = [
-  //{ name: "Dashboard", path: "/" },
-  { name: "Coding Habits", path: "/coding" },
-  { name: "Physical Habits", path: "/physical" },
-  { name: "Mental Health Habits", path: "/mental" },
+  { name: "Dashboard", path: "/" },
+  { name: "Coding", path: "/coding" },
+  { name: "Physical", path: "/physical" },
+  { name: "Mental Health", path: "/mental" },
   // Add more habits as needed
 ];
 
