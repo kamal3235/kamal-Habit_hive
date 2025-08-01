@@ -56,7 +56,7 @@ const CodingTracker = ({ entries, setEntries }) => {
     totalSessions > 0 ? (totalHours / totalSessions).toFixed(1) : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-black to-yellow-400 text-yellow-400 font-montserrat">
+    <div className="min-h-screen /*bg-gradient-to-br from-black via-black to-yellow-400*/ text-yellow-400 font-montserrat">
       {/* Mosaic Progress Popup */}
       {showMosaic && (
         <div className="fixed inset-0 bg-black flex justify-center items-center animate-fadeIn z-50">
@@ -110,6 +110,9 @@ const CodingTracker = ({ entries, setEntries }) => {
 
       <div className="flex justify-center">
         <main className="justify-center items-center text-center max-w-lg mx-auto my-8 bg-gray-900 rounded-2xl p-6 shadow-2xl shadow-black/50">
+          <h1 className="text-2xl font-bold mb-6 text-yellow-400">
+            You've been a busy coding bee!
+          </h1>
           {/* Today's Status */}
           <div className="mb-4 p-3 rounded-lg bg-gray-800 border border-yellow-400">
             <div className="text-yellow-400 font-semibold">

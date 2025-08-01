@@ -5,8 +5,8 @@ import React from "react";
 // In a real app, you might fetch this from a backend or a global state.
 
 const HABIT_CATEGORIES = [
-  { name: "Coding", key: "coding" },
-  { name: "Physical", key: "physical" },
+  { name: "Coding Progress", key: "coding" },
+  { name: "Physical Health", key: "physical" },
   { name: "Mental Health", key: "mental" },
 ];
 
