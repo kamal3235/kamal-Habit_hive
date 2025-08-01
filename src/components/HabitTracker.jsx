@@ -16,11 +16,13 @@ const HabitTracker = ({
   const [value, setValue] = useState("");
   const [showMosaic, setShowMosaic] = useState(false);
 
+  // Check if user has already logged an entry today
   const hasLoggedToday = () => {
     const today = new Date().toDateString();
     return entries.some((entry) => entry.date === today);
   };
 
+  // Get today's entries count
   const getTodayEntriesCount = () => {
     const today = new Date().toDateString();
     return entries.filter((entry) => entry.date === today).length;
@@ -43,6 +45,10 @@ const HabitTracker = ({
     setValue("");
     setShowMosaic(true);
 
+    // Dispatch custom event to notify dashboard of data update
+    window.dispatchEvent(new CustomEvent("habitDataUpdated"));
+
+    // Hide mosaic after 12 seconds
     setTimeout(() => setShowMosaic(false), 12000);
   };
 
@@ -59,7 +65,7 @@ const HabitTracker = ({
     totalSessions > 0 ? (totalValue / totalSessions).toFixed(1) : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-black to-yellow-400 text-yellow-400 font-montserrat">
+    <div className="min-h-screen /*bg-gradient-to-br from-black via-black to-yellow-400*/ text-yellow-400 font-montserrat">
       {/* Mosaic Progress Popup */}
       {showMosaic && (
         <div className="fixed inset-0 bg-black flex justify-center items-center animate-fadeIn z-50">
@@ -106,11 +112,16 @@ const HabitTracker = ({
               Close
             </button>
           </div>
+          <br></br>
         </div>
       )}
 
       <div className="flex justify-center">
         <main className="justify-center items-center text-center max-w-lg mx-auto my-8 bg-gray-900 rounded-2xl p-6 shadow-2xl shadow-black/50">
+          <h1 className="text-2xl font-bold mb-6 text-yellow-400">
+            You've been a busy coding bee!
+          </h1>
+          {/* Today's Status */}
           <div className="mb-4 p-3 rounded-lg bg-gray-800 border border-yellow-400">
             <div className="text-yellow-400 font-semibold">
               Today's Progress
