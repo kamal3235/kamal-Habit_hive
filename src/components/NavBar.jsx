@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 
 // Define menu items and routes
 const habitPages = [
+  // { name: "Home", path: "/" },
   { name: "Dashboard", path: "/" },
   { name: "Coding", path: "/coding" },
   { name: "Physical", path: "/physical" },
