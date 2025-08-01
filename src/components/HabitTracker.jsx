@@ -71,10 +71,10 @@ const HabitTracker = ({
         <div className="fixed inset-0 bg-black flex justify-center items-center animate-fadeIn z-50">
           <div className="bg-gray-900 rounded-3xl p-8 max-w-md text-center border-3 border-yellow-400 shadow-2xl shadow-yellow-400/30">
             <h2 className="text-yellow-400 mb-4 text-2xl">
-              🐝 Progress Update! 🐝
+              🐝 Bee-autiful Work! 🐝
             </h2>
             <div className="mb-6">
-              <div className="text-4xl mb-2">🎯</div>
+              <div className="text-4xl mb-2">🌻</div>
               <div className="text-white text-xl mb-1">
                 Total:{" "}
                 <span className="text-yellow-400 font-bold">
