@@ -59,10 +59,10 @@ function App() {
               <Route
                 path="/achievements"
                 element={
-                  <AchievementPage 
-                    entries={codingEntries} 
-                    physicalEntries={physicalEntries} 
-                    mentalEntries={mentalEntries} 
+                  <AchievementPage
+                    entries={codingEntries}
+                    physicalEntries={physicalEntries}
+                    mentalEntries={mentalEntries}
                   />
                 }
               />
