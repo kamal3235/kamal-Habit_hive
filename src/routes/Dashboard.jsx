@@ -33,11 +33,11 @@ function getHabitData() {
 // Helper to calculate 7-day totals for a category
 function getSevenDayTotal(timestamps) {
   if (!Array.isArray(timestamps)) return 0;
-  
+
   const sevenDaysAgo = new Date();
   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-  
-  return timestamps.filter(timestamp => {
+
+  return timestamps.filter((timestamp) => {
     const entryDate = new Date(timestamp);
     return entryDate >= sevenDaysAgo;
   }).length;
@@ -54,23 +54,22 @@ const Dashboard = () => {
   }, []);
 
   // Calculate 7-day totals for each category
-  const sevenDayTotals = HABIT_CATEGORIES.map(cat => ({
+  const sevenDayTotals = HABIT_CATEGORIES.map((cat) => ({
     ...cat,
-    total: getSevenDayTotal(habitData[cat.key])
+    total: getSevenDayTotal(habitData[cat.key]),
   }));
 
   // Calculate summary stats
   const totalActions = sevenDayTotals.reduce((sum, cat) => sum + cat.total, 0);
 
   // Prepare data for a simple bar chart (no chart library, just a visual)
-  const maxCount = Math.max(
-    ...sevenDayTotals.map((cat) => cat.total),
-    1
-  );
+  const maxCount = Math.max(...sevenDayTotals.map((cat) => cat.total), 1);
 
   return (
     <div className="p-4 max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-yellow-400">Your Habit Dashboard</h1>
+      <h1 className="text-2xl font-bold mb-6 text-yellow-400">
+        Your Habit Dashboard
+      </h1>
 
       <div className="mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
         {sevenDayTotals.map((cat) => (
@@ -78,7 +77,9 @@ const Dashboard = () => {
             key={cat.key}
             className="bg-black border-2 border-yellow-400 rounded-lg p-4 flex flex-col items-center shadow-lg"
           >
-            <span className="text-lg font-semibold text-yellow-400">{cat.name}</span>
+            <span className="text-lg font-semibold text-yellow-400">
+              {cat.name}
+            </span>
             <span className="text-4xl font-bold text-white mt-2">
               {cat.total}
             </span>
@@ -88,13 +89,18 @@ const Dashboard = () => {
       </div>
 
       <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-2 text-yellow-300">Habit Activity (Bar Chart)</h2>
+        <h2 className="text-xl font-semibold mb-2 text-yellow-300">
+          Habit Activity (Bar Chart)
+        </h2>
         <div className="flex items-end justify-between h-48 bg-yellow-950 rounded-lg p-4">
           {sevenDayTotals.map((cat) => {
             const count = cat.total;
             const barHeight = `${(count / maxCount) * 100}%`;
             return (
-              <div key={cat.key} className="flex flex-col items-center flex-1 mx-1">
+              <div
+                key={cat.key}
+                className="flex flex-col items-center flex-1 mx-1"
+              >
                 <div
                   className="w-full bg-yellow-400 rounded-t"
                   style={{
@@ -104,7 +110,9 @@ const Dashboard = () => {
                   }}
                   title={`${count} actions`}
                 ></div>
-                <span className="mt-2 text-yellow-200 text-sm text-center">{cat.name}</span>
+                <span className="mt-2 text-yellow-200 text-sm text-center">
+                  {cat.name}
+                </span>
                 <span className="text-white text-xs">{count}</span>
               </div>
             );
@@ -113,13 +121,19 @@ const Dashboard = () => {
       </div>
 
       <div>
-        <h2 className="text-xl font-semibold mb-2 text-yellow-300">Recent Activity</h2>
+        <h2 className="text-xl font-semibold mb-2 text-yellow-300">
+          Recent Activity
+        </h2>
         <div className="overflow-x-auto">
           <table className="w-full border border-yellow-400 bg-black rounded-lg">
             <thead>
               <tr>
-                <th className="p-2 text-left border-b border-yellow-400 text-yellow-300">Category</th>
-                <th className="p-2 text-left border-b border-yellow-400 text-yellow-300">Timestamp</th>
+                <th className="p-2 text-left border-b border-yellow-400 text-yellow-300">
+                  Category
+                </th>
+                <th className="p-2 text-left border-b border-yellow-400 text-yellow-300">
+                  Timestamp
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -128,7 +142,7 @@ const Dashboard = () => {
                   category: cat.name,
                   timestamp: ts,
                   key: `${cat.key}-${idx}-${ts}`,
-                }))
+                })),
               )
                 .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
                 .slice(0, 10)
