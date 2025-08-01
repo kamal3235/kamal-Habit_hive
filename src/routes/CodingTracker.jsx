@@ -13,7 +13,12 @@ const codingConfig = {
 };
 
 const CodingTracker = ({ entries, setEntries }) => (
-  <HabitTracker entries={entries} setEntries={setEntries} {...codingConfig} />
+  <HabitTracker
+    inspoQuote="You've been a busy coding bee!"
+    entries={entries}
+    setEntries={setEntries}
+    {...codingConfig}
+  />
 );
 
 export default CodingTracker;

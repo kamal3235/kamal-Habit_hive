@@ -10,7 +10,7 @@ const HabitTracker = ({
   placeholder,
   unit,
   mosaicGridSize = 4,
-  mosaicColor = "yellow-400",
+  inspoQuote,
   clearWarning = "Are you sure you want to clear all your data? This cannot be undone.",
 }) => {
   const [value, setValue] = useState("");
