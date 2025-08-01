@@ -10,7 +10,7 @@ const HabitTracker = ({
   placeholder,
   unit,
   mosaicGridSize = 4,
-  mosaicColor = "yellow-400",
+  inspoQuote,
   clearWarning = "Are you sure you want to clear all your data? This cannot be undone.",
 }) => {
   const [value, setValue] = useState("");
@@ -119,7 +119,7 @@ const HabitTracker = ({
       <div className="flex justify-center">
         <main className="justify-center items-center text-center max-w-lg mx-auto my-8 bg-gray-900 rounded-2xl p-6 shadow-2xl shadow-black/50">
           <h1 className="text-2xl font-bold mb-6 text-yellow-400">
-            You've been a busy coding bee!
+            {inspoQuote}
           </h1>
           {/* Today's Status */}
           <div className="mb-4 p-3 rounded-lg bg-gray-800 border border-yellow-400">
