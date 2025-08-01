@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import MosaicReveal from "./components/MosaicReveal";
+import codingImage from "./assets/codingImage.jpg"; // Adjust the path as necessary
 import Header from "./Header";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
@@ -32,7 +34,7 @@ function App() {
         hour: "2-digit",
         minute: "2-digit",
       }),
-      date: new Date().toDateString(), // Add date tracking
+      date: new Date().toDateString(),
     };
 
     setEntries([...entries, newEntry]);
@@ -89,17 +91,14 @@ function App() {
               </div>
             </div>
 
-            {/* Progress Mosaic */}
-            <div className="grid grid-cols-6 gap-2 mb-5">
-              {Array.from({ length: 30 }, (_, i) => (
-                <div
-                  key={i}
-                  className={`w-5 h-5 rounded-full border border-yellow-400 ${
-                    i < totalSessions ? "opacity-100" : "opacity-30"
-                  }`}
-                />
-              ))}
-            </div>
+            <MosaicReveal
+              imageSrc={codingImage}
+              filledSquares={entries.length}
+              onComplete={() => {
+                setTimeout(() => setShowMosaic(false), 3000);
+              }}
+              gridSize={4}
+            />
 
             <div className="text-yellow-400 text-sm">
               Keep building your hive! 🐝
@@ -180,15 +179,15 @@ function App() {
               )}
             </div>
             <div
-              className="grid grid-cols-auto-fit gap-4 mt-4"
+              className="grid gap-2 sm:gap-4 mt-4"
               style={{
-                gridTemplateColumns: "repeat(auto-fit, minmax(80px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fit, minmax(64px, 1fr))",
               }}
             >
               {entries.map((entry, idx) => (
                 <div
                   key={idx}
-                  className={`hexagon p-4 text-center shadow-lg font-bold text-lg ${
+                  className={`hexagon p-2 sm:p-4 text-center shadow-lg font-bold text-xs sm:text-sm md:text-lg ${
                     idx % 2 === 0
                       ? "bg-yellow-400 text-black"
                       : "bg-black text-yellow-400"
@@ -196,8 +195,8 @@ function App() {
                   style={{
                     clipPath:
                       "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-                    width: "80px",
-                    height: "92px",
+                    width: "64px",
+                    height: "74px",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
@@ -205,10 +204,11 @@ function App() {
                     margin: "0 auto",
                   }}
                 >
-                  {/* <div className="text-2xl mb-1">🐝</div> */}
-                  <div className="text-sm font-bold">{entry.hours}h 🐝</div>
+                  <div className="text-xs font-bold leading-tight">
+                    {entry.hours}h 🐝
+                  </div>
                   {entry.date && (
-                    <div className="text-xs opacity-75 mt-1">
+                    <div className="text-xs opacity-75 mt-1 leading-tight">
                       {new Date(entry.date).toLocaleDateString()}
                     </div>
                   )}
