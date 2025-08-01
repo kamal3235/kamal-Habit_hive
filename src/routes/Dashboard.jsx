@@ -9,23 +9,23 @@ import mentalImage from "../assets/mental.jpg";
 // In a real app, you might fetch this from a backend or a global state.
 
 const HABIT_CATEGORIES = [
-  { 
-    name: "Coding", 
+  {
+    name: "Coding",
     key: "coding",
     image: codingImage,
-    goal: 16 // Weekly goal: 16 sessions = all 16 squares filled in MosaicReveal
+    goal: 16, // Weekly goal: 16 sessions = all 16 squares filled in MosaicReveal
   },
-  { 
-    name: "Physical Health", 
+  {
+    name: "Physical Health",
     key: "physical",
     image: healthImage,
-    goal: 16 // Weekly goal: 16 activities = all 16 squares filled in MosaicReveal
+    goal: 16, // Weekly goal: 16 activities = all 16 squares filled in MosaicReveal
   },
-  { 
-    name: "Mental Health", 
+  {
+    name: "Mental Health",
     key: "mental",
     image: mentalImage,
-    goal: 16 // Weekly goal: 16 activities = all 16 squares filled in MosaicReveal
+    goal: 16, // Weekly goal: 16 activities = all 16 squares filled in MosaicReveal
   },
 ];
 
@@ -42,9 +42,9 @@ function getHabitData() {
       console.log("📋 Parsed entries:", entries);
       // Convert the entries array to the expected format
       data = {
-        coding: entries.map(entry => entry.date), // Use date as timestamp for coding entries
+        coding: entries.map((entry) => entry.date), // Use date as timestamp for coding entries
         physical: [], // Physical tracker not implemented yet
-        mental: []    // Mental health tracker not implemented yet
+        mental: [], // Mental health tracker not implemented yet
       };
       console.log("🔄 Converted data:", data);
     }
@@ -95,16 +95,17 @@ const Dashboard = ({ entries = [] }) => {
   React.useEffect(() => {
     const onCustomStorage = () => updateHabitData();
     window.addEventListener("habitDataUpdated", onCustomStorage);
-    return () => window.removeEventListener("habitDataUpdated", onCustomStorage);
+    return () =>
+      window.removeEventListener("habitDataUpdated", onCustomStorage);
   }, [updateHabitData]);
 
   // Update habitData when entries prop changes (for immediate updates)
   React.useEffect(() => {
     console.log("📝 Entries prop changed:", entries.length, "entries");
     const updatedData = {
-      coding: entries.map(entry => entry.date),
+      coding: entries.map((entry) => entry.date),
       physical: [], // Physical tracker not implemented yet
-      mental: []    // Mental health tracker not implemented yet
+      mental: [], // Mental health tracker not implemented yet
     };
     console.log("🔄 Setting habit data from entries:", updatedData);
     setHabitData(updatedData);
@@ -156,7 +157,7 @@ const Dashboard = ({ entries = [] }) => {
         {sevenDayTotals.map((cat) => {
           const progress = Math.min(cat.total, cat.goal);
           const percentage = Math.round((progress / cat.goal) * 100);
-          
+
           return (
             <div
               key={cat.key}
@@ -167,11 +168,13 @@ const Dashboard = ({ entries = [] }) => {
                   {cat.name}
                 </h2>
                 <div className="flex justify-between items-center text-sm text-yellow-200">
-                  <span>Progress: {cat.total}/{cat.goal}</span>
+                  <span>
+                    Progress: {cat.total}/{cat.goal}
+                  </span>
                   <span>{percentage}%</span>
                 </div>
               </div>
-              
+
               <div className="mb-4">
                 <MosaicReveal
                   imageSrc={cat.image}
@@ -180,19 +183,18 @@ const Dashboard = ({ entries = [] }) => {
                   gridSize={4}
                 />
               </div>
-              
+
               <div className="text-center">
                 <div className="w-full bg-yellow-950 rounded-full h-2 mb-2">
-                  <div 
+                  <div
                     className="bg-yellow-400 h-2 rounded-full transition-all duration-300"
                     style={{ width: `${percentage}%` }}
                   ></div>
                 </div>
                 <p className="text-yellow-200 text-sm">
-                  {cat.total >= cat.goal 
-                    ? "Goal achieved! 🎉" 
-                    : `${cat.goal - cat.total} more to reach your goal`
-                  }
+                  {cat.total >= cat.goal
+                    ? "Goal achieved! 🎉"
+                    : `${cat.goal - cat.total} more to reach your goal`}
                 </p>
               </div>
             </div>
@@ -207,18 +209,25 @@ const Dashboard = ({ entries = [] }) => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center">
-            <div className="text-3xl font-bold text-yellow-400">{totalActions}</div>
+            <div className="text-3xl font-bold text-yellow-400">
+              {totalActions}
+            </div>
             <div className="text-yellow-200">Total Actions</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-yellow-400">
-              {Math.round((totalActions / (HABIT_CATEGORIES.reduce((sum, cat) => sum + cat.goal, 0))) * 100)}%
+              {Math.round(
+                (totalActions /
+                  HABIT_CATEGORIES.reduce((sum, cat) => sum + cat.goal, 0)) *
+                  100,
+              )}
+              %
             </div>
             <div className="text-yellow-200">Overall Progress</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-yellow-400">
-              {sevenDayTotals.filter(cat => cat.total >= cat.goal).length}
+              {sevenDayTotals.filter((cat) => cat.total >= cat.goal).length}
             </div>
             <div className="text-yellow-200">Goals Completed</div>
           </div>
@@ -248,7 +257,10 @@ const Dashboard = ({ entries = [] }) => {
             <tbody>
               {/* Show coding entries */}
               {entries.slice(0, 10).map((entry, idx) => (
-                <tr key={`coding-${idx}`} className="border-b border-yellow-900">
+                <tr
+                  key={`coding-${idx}`}
+                  className="border-b border-yellow-900"
+                >
                   <td className="p-2 text-yellow-200">Coding</td>
                   <td className="p-2 text-white">{entry.hours}h session</td>
                   <td className="p-2 text-white">
