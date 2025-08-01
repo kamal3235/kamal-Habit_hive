@@ -66,7 +66,7 @@ const AchievementPage = ({ entries = [] }) => {
           dailyData[day] = { hours: 0, sessions: 0 };
         }
         dailyData[day].hours += entry.hours;
-        dailyData[day].sessions += 1;
+        dailyData[day].sessions += 1; // Sessions are always whole numbers
       });
 
       const chartData = Object.entries(dailyData).map(([day, data]) => ({
@@ -131,7 +131,8 @@ const AchievementPage = ({ entries = [] }) => {
       },
       y: {
         ticks: {
-          color: '#fbbf24'
+          color: '#fbbf24',
+          stepSize: 1 // Ensure whole number steps for sessions
         },
         grid: {
           color: '#374151'
@@ -158,7 +159,7 @@ const AchievementPage = ({ entries = [] }) => {
     datasets: [
       {
         label: 'Sessions',
-        data: achievementData.chartData?.map(item => item.sessions) || [],
+        data: achievementData.chartData?.map(item => Math.round(item.sessions)) || [], // Ensure sessions are whole numbers
         borderColor: '#fbbf24',
         backgroundColor: 'rgba(251, 191, 36, 0.1)',
         borderWidth: 3,
@@ -166,6 +167,24 @@ const AchievementPage = ({ entries = [] }) => {
         tension: 0.4,
       },
     ],
+  };
+
+  // Separate options for sessions chart to ensure whole numbers
+  const sessionsChartOptions = {
+    ...chartOptions,
+    scales: {
+      ...chartOptions.scales,
+      y: {
+        ...chartOptions.scales.y,
+        stepSize: 1,
+        ticks: {
+          ...chartOptions.scales.y.ticks,
+          callback: function(value) {
+            return Math.round(value); // Ensure only whole numbers are displayed
+          }
+        }
+      }
+    }
   };
 
   return (
@@ -268,7 +287,7 @@ const AchievementPage = ({ entries = [] }) => {
           <div className="bg-gray-900 rounded-lg p-6 border border-yellow-400">
             <h3 className="text-xl font-bold mb-4">Daily Sessions</h3>
             <div className="h-80">
-              <Line data={sessionsChartData} options={chartOptions} />
+              <Line data={sessionsChartData} options={sessionsChartOptions} />
             </div>
           </div>
         </div>
