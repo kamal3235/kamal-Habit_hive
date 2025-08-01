@@ -71,10 +71,10 @@ const HabitTracker = ({
         <div className="fixed inset-0 bg-black flex justify-center items-center animate-fadeIn z-50">
           <div className="bg-gray-900 rounded-3xl p-8 max-w-md text-center border-3 border-yellow-400 shadow-2xl shadow-yellow-400/30">
             <h2 className="text-yellow-400 mb-4 text-2xl">
-              🐝 Progress Update! 🐝
+              🐝 Bee-autiful Work! 🐝
             </h2>
             <div className="mb-6">
-              <div className="text-4xl mb-2">🎯</div>
+              <div className="text-4xl mb-2">🌻</div>
               <div className="text-white text-xl mb-1">
                 Total:{" "}
                 <span className="text-yellow-400 font-bold">
@@ -119,7 +119,7 @@ const HabitTracker = ({
       <div className="flex justify-center">
         <main className="justify-center items-center text-center max-w-lg mx-auto my-8 bg-gray-900 rounded-2xl p-6 shadow-2xl shadow-black/50">
           <h1 className="text-2xl font-bold mb-6 text-yellow-400">
-            You've been a busy coding bee!
+            {inspoQuote}
           </h1>
           {/* Today's Status */}
           <div className="mb-4 p-3 rounded-lg bg-gray-800 border border-yellow-400">

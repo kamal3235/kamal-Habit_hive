@@ -1,9 +1,9 @@
 import React from "react";
 import MosaicReveal from "../components/MosaicReveal";
 import WelcomeLanding from "../components/WelcomeLanding";
-import codingImage from "../assets/codingImage.jpg";
-import healthImage from "../assets/Health.jpg";
-import mentalImage from "../assets/mental.jpg";
+import programmingBee from "../assets/programmingBee.jpg";
+import flashdanceBee from "../assets/flashdanceBee.jpg";
+import meditatingBee from "../assets/meditatingBee.jpg";
 
 // This Dashboard page summarizes the user's habit data collected from other pages.
 // For this example, we'll use localStorage to simulate collected data from other pages.
@@ -13,19 +13,19 @@ const HABIT_CATEGORIES = [
   {
     name: "Coding",
     key: "coding",
-    image: codingImage,
+    image: programmingBee,
     goal: 16, // Weekly goal: 16 sessions = all 16 squares filled in MosaicReveal
   },
   {
     name: "Physical Health",
     key: "physical",
-    image: healthImage,
+    image: flashdanceBee,
     goal: 16, // Weekly goal: 16 activities = all 16 squares filled in MosaicReveal
   },
   {
     name: "Mental Health",
     key: "mental",
-    image: mentalImage,
+    image: meditatingBee,
     goal: 16, // Weekly goal: 16 activities = all 16 squares filled in MosaicReveal
   },
 ];
