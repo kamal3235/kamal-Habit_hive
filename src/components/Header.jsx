@@ -1,12 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NavBar from "./NavBar";
 
-// Placeholder components
-const Dashboard = () => <div></div>;
-const Coding = () => <div></div>;
-const Physical = () => <div></div>;
-const MentalHealth = () => <div></div>;
+import NavBar from "./NavBar";
 
 const Header = () => {
   return (
@@ -15,18 +8,7 @@ const Header = () => {
       <p className="text-white mt-2">
         Track your coding hours and build your hive!
       </p>
-      {/* <Router> */}
       <NavBar />
-      {/* <div className="flex justify-center">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/coding" element={<Coding />} />
-            <Route path="/physical" element={<Physical />} />
-            <Route path="/mental" element={<MentalHealth />} /> */}
-      {/* Add more routes as needed  */}
-      {/* </Routes>
-        </div>
-      </Router> */}
     </header>
   );
 };
