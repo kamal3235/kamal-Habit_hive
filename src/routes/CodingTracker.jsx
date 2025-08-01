@@ -35,6 +35,9 @@ const CodingTracker = ({ entries, setEntries }) => {
     setHours("");
     setShowMosaic(true);
 
+    // Dispatch custom event to notify dashboard of data update
+    window.dispatchEvent(new CustomEvent("habitDataUpdated"));
+
     // Hide mosaic after 12 seconds
     setTimeout(() => setShowMosaic(false), 12000);
   };
