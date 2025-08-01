@@ -4,9 +4,9 @@ import flashdanceBee from "../assets/flashdanceBee.jpg";
 const physicalConfig = {
   title: "Your Physical Hive",
   imageSrc: flashdanceBee,
-  entryLabel: "How many minutes did you exercise?",
-  placeholder: "e.g. 30",
-  unit: "min",
+  entryLabel: "How many hours did you exercise?",
+  placeholder: "e.g. 1.5",
+  unit: "h",
   mosaicGridSize: 4,
   clearWarning:
     "Are you sure you want to clear all your physical activity data? This cannot be undone.",
