@@ -1,9 +1,9 @@
 import React from "react";
 import MosaicReveal from "../components/MosaicReveal";
 import WelcomeLanding from "../components/WelcomeLanding";
-import codingImage from "../assets/codingImage.jpg";
-import healthImage from "../assets/Health.jpg";
-import mentalImage from "../assets/mental.jpg";
+import programmingBee from "../assets/programmingBee.jpg";
+import flashdanceBee from "../assets/flashdanceBee.jpg";
+import meditatingBee from "../assets/meditatingBee.jpg";
 
 // This Dashboard page summarizes the user's habit data collected from other pages.
 // For this example, we'll use localStorage to simulate collected data from other pages.
@@ -13,19 +13,19 @@ const HABIT_CATEGORIES = [
   {
     name: "Coding",
     key: "coding",
-    image: codingImage,
+    image: programmingBee,
     goal: 16, // Weekly goal: 16 sessions = all 16 squares filled in MosaicReveal
   },
   {
     name: "Physical Health",
     key: "physical",
-    image: healthImage,
+    image: flashdanceBee,
     goal: 16, // Weekly goal: 16 activities = all 16 squares filled in MosaicReveal
   },
   {
     name: "Mental Health",
     key: "mental",
-    image: mentalImage,
+    image: meditatingBee,
     goal: 16, // Weekly goal: 16 activities = all 16 squares filled in MosaicReveal
   },
 ];
@@ -37,17 +37,17 @@ function getHabitData() {
   try {
     // Check for the actual localStorage key being used
     const stored = localStorage.getItem("habit-hive-entries");
-    console.log("🗄️ localStorage data:", stored);
+    //console.log("🗄️ localStorage data:", stored);
     if (stored) {
       const entries = JSON.parse(stored);
-      console.log("📋 Parsed entries:", entries);
+      //console.log("📋 Parsed entries:", entries);
       // Convert the entries array to the expected format
       data = {
         coding: entries.map((entry) => entry.date), // Use date as timestamp for coding entries
         physical: [], // Physical tracker not implemented yet
         mental: [], // Mental health tracker not implemented yet
       };
-      console.log("🔄 Converted data:", data);
+      //console.log("🔄 Converted data:", data);
     }
   } catch (e) {
     console.error("❌ Error reading localStorage:", e);
@@ -79,9 +79,9 @@ const Dashboard = ({ entries = [] }) => {
 
   // Function to update habit data from localStorage
   const updateHabitData = React.useCallback(() => {
-    console.log("🔄 Updating habit data from localStorage...");
+    //console.log("🔄 Updating habit data from localStorage...");
     const newData = getHabitData();
-    console.log("📊 New habit data:", newData);
+    //console.log("📊 New habit data:", newData);
     setHabitData(newData);
   }, []);
 
@@ -108,7 +108,7 @@ const Dashboard = ({ entries = [] }) => {
       physical: [], // Physical tracker not implemented yet
       mental: [], // Mental health tracker not implemented yet
     };
-    console.log("🔄 Setting habit data from entries:", updatedData);
+    //console.log("🔄 Setting habit data from entries:", updatedData);
     setHabitData(updatedData);
   }, [entries]);
 
@@ -124,7 +124,7 @@ const Dashboard = ({ entries = [] }) => {
   // Calculate 7-day totals for each category
   const sevenDayTotals = HABIT_CATEGORIES.map((cat) => {
     const total = getSevenDayTotal(habitData[cat.key]);
-    console.log(`📊 ${cat.name}: ${total} entries in last 7 days`);
+    //console.log(`📊 ${cat.name}: ${total} entries in last 7 days`);
     return {
       ...cat,
       total: total,
@@ -135,7 +135,7 @@ const Dashboard = ({ entries = [] }) => {
   const totalActions = sevenDayTotals.reduce((sum, cat) => sum + cat.total, 0);
 
   const handleMosaicComplete = (categoryName) => {
-    console.log(`${categoryName} goal completed!`);
+    //console.log(`${categoryName} goal completed!`);
     // You could add celebration logic here
   };
 
