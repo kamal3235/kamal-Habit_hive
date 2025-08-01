@@ -5,6 +5,7 @@ import Dashboard from "./routes/Dashboard";
 import CodingTracker from "./routes/CodingTracker";
 import PhysicalTracker from "./routes/PhysicalTracker";
 import MentalHealthTracker from "./routes/MentalHealthTracker";
+import AchievementPage from "./routes/AchievementPage";
 
 function App() {
   const [codingEntries, setCodingEntries] = useLocalStorage(

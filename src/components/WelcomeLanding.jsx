@@ -26,12 +26,12 @@ const WelcomeLanding = () => {
             >
               Start Tracking
             </Link>
-            <Link
+            {/* <Link
               to="/"
               className="px-8 py-3 border-2 border-yellow-400 text-yellow-400 font-bold rounded-lg hover:bg-yellow-400 hover:text-black transition-colors"
             >
               View Dashboard
-            </Link>
+            </Link> */}
           </div>
         </div>
 
