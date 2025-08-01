@@ -117,6 +117,7 @@ Completed and deployed in under 4 days.
 -Russell C (@russllist)
 -Adrian C (@acarvjl in discord, acarvjl Github)
 -Rebecca A. Stone (@beckstone on discord and Github)
+-Abu H Kamal(@kamal3235, kamal3235 in Github)
 
 ---
 
