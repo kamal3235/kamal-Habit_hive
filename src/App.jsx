@@ -228,7 +228,6 @@ function App() {
                     margin: "0 auto",
                   }}
                 >
-                  {/* <div className="text-md sm:text-xl mb-1 leading-tight">🐝</div> */}
                   <div className="text-xs font-bold leading-tight">
                     {entry.hours}h 🐝
                   </div>
