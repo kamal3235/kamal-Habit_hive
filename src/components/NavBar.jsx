@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 
 // Define menu items and routes
@@ -28,7 +27,10 @@ const NavBar = () => {
           }
           end={page.path === "/"}
         >
-          {page.name}
+          {/* <span className="text-lg">{page.icon}</span> */}
+          <span className="hidden sm:inline">{page.name}</span>
+          <span className="sm:hidden text-xs">{page.name}</span>
+          {/* {page.name} */}
         </NavLink>
       ))}
     </nav>
