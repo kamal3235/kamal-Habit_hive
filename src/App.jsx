@@ -56,6 +56,10 @@ function App() {
                   />
                 }
               />
+              <Route
+                path="/achievements"
+                element={<AchievementPage entries={codingEntries} />}
+              />
             </Routes>
           </main>
         </div>
