@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import MosaicReveal from "./components/MosaicReveal";
+import codingImage from "./assets/codingImage.jpg"; // Adjust the path as necessary
 import Header from "./Header";
 
 function App() {
@@ -29,7 +31,7 @@ function App() {
         hour: "2-digit",
         minute: "2-digit",
       }),
-      date: new Date().toDateString(), // Add date tracking
+      date: new Date().toDateString(),
     };
 
     setEntries([...entries, newEntry]);
@@ -86,17 +88,14 @@ function App() {
               </div>
             </div>
 
-            {/* Progress Mosaic */}
-            <div className="grid grid-cols-6 gap-2 mb-5">
-              {Array.from({ length: 30 }, (_, i) => (
-                <div
-                  key={i}
-                  className={`w-5 h-5 rounded-full border border-yellow-400 ${
-                    i < totalSessions ? "opacity-100" : "opacity-30"
-                  }`}
-                />
-              ))}
-            </div>
+            <MosaicReveal
+              imageSrc={codingImage}
+              filledSquares={entries.length}
+              onComplete={() => {
+                setTimeout(() => setShowMosaic(false), 3000);
+              }}
+              gridSize={4}
+            />
 
             <div className="text-yellow-400 text-sm">
               Keep building your hive! 🐝
