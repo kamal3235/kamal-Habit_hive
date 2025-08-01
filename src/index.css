@@ -1,12 +1,4 @@
-/* @import "tailwindcss";
- */
 @import "tailwindcss/tailwind.css";
-/* AI had me replace import with these 3
-tailwind references   -eric */
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
-
 
 /* Reset and base styles */
 * {
