@@ -5,6 +5,7 @@ import Dashboard from "./routes/Dashboard";
 import CodingTracker from "./routes/CodingTracker";
 import PhysicalTracker from "./routes/PhysicalTracker";
 import MentalHealthTracker from "./routes/MentalHealthTracker";
+import AchievementPage from "./routes/AchievementPage";
 
 function App() {
   const [entries, setEntries] = useLocalStorage("habit-hive-entries", []);
@@ -26,6 +27,7 @@ function App() {
               />
               <Route path="/physical" element={<PhysicalTracker />} />
               <Route path="/mental" element={<MentalHealthTracker />} />
+              <Route path="/achievements" element={<AchievementPage entries={entries} />} />
             </Routes>
           </main>
         </div>
