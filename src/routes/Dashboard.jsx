@@ -1,5 +1,6 @@
 import React from "react";
 import MosaicReveal from "../components/MosaicReveal";
+import WelcomeLanding from "../components/WelcomeLanding";
 import codingImage from "../assets/codingImage.jpg";
 import healthImage from "../assets/Health.jpg";
 import mentalImage from "../assets/mental.jpg";
@@ -136,6 +137,11 @@ const Dashboard = ({ entries = [] }) => {
     console.log(`${categoryName} goal completed!`);
     // You could add celebration logic here
   };
+
+  // Show welcome landing page if no progress
+  if (totalActions === 0) {
+    return <WelcomeLanding />;
+  }
 
   return (
     <div className="p-4 max-w-6xl mx-auto">
