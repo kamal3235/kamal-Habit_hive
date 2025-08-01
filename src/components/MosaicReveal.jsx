@@ -39,16 +39,17 @@ const MosaicReveal = ({
         backgroundPosition: `${col * sizePercent}% ${row * sizePercent}%`,
         backgroundRepeat: "no-repeat",
         opacity: 1,
-        transition: "opacity 0.3s ease-in-out",
+        transition: "opacity 0.3s ease-in-out, filter 0.3s ease-in-out",
         width: "100%",
         height: "100%",
-        minHeight: "40px", // Ensure minimum size for visibility
+        minHeight: "40px",
+        filter: "blur(3px)", // Add blur to revealed squares
       };
     }
 
     return {
       opacity: 0.3,
-      transition: "opacity 0.3s ease-in-out",
+      transition: "opacity 0.3s ease-in-out, filter 0.3s ease-in-out",
       width: "100%",
       height: "100%",
       minHeight: "40px", // Ensure minimum size for visibility
@@ -62,7 +63,7 @@ const MosaicReveal = ({
         className="absolute inset-0 bg-cover bg-center rounded-lg"
         style={{
           backgroundImage: `url(${beehive})`,
-          filter: "blur(2px) brightness(0.3)",
+          filter: "blur(4px) brightness(0.3)",
         }}
       />
 
