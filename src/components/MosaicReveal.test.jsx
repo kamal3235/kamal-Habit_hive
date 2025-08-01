@@ -132,4 +132,139 @@ describe("MosaicReveal", () => {
     );
     expect(backgroundDiv.style.filter).to.equal("blur(4px) brightness(0.3)");
   });
+  it("displays completion count indicator when completionCount > 0", () => {
+    const { container } = render(
+      <MosaicReveal imageSrc={mockImageSrc} completionCount={5} />,
+    );
+
+    const completionIndicator = container.querySelector(".bg-blue-600\\/90");
+    expect(completionIndicator).toHaveTextContent("5/16");
+  });
+
+  it("does not display completion count indicator when completionCount is 0", () => {
+    const { container } = render(
+      <MosaicReveal imageSrc={mockImageSrc} completionCount={0} />,
+    );
+
+    const completionIndicator = container.querySelector(".bg-blue-600\\/90");
+    expect(completionIndicator).not.toBeInTheDocument();
+  });
+
+  it("shows full unblurred image when completionCount >= 16", () => {
+    const { container } = render(
+      <MosaicReveal
+        imageSrc={mockImageSrc}
+        completionCount={16}
+        filledSquares={10}
+      />,
+    );
+
+    // Should not render mosaic grid
+    const squares = container.querySelectorAll(".bg-gray-800");
+    expect(squares).toHaveLength(16);
+
+    // Should render full image
+    const fullImage = container.querySelector(".bg-cover.bg-center");
+    expect(fullImage).toHaveStyle({
+      backgroundImage: `url(${mockImageSrc})`,
+      aspectRatio: "1/1",
+    });
+
+    // Should show unlocked badge
+    const unlockedBadge = container.querySelector(".bg-green-600\\/90");
+    expect(unlockedBadge).toBeInTheDocument();
+    expect(unlockedBadge).toHaveTextContent("Unlocked!");
+
+    // Should still show progress indicator
+    const progressIndicator = container.querySelector(".bg-black\\/70");
+    expect(progressIndicator).toBeInTheDocument();
+    expect(progressIndicator).toHaveTextContent("10/16");
+  });
+
+  it("shows full unblurred image when completionCount > 16", () => {
+    const { container } = render(
+      <MosaicReveal
+        imageSrc={mockImageSrc}
+        completionCount={20}
+        filledSquares={16}
+      />,
+    );
+
+    // Should not render mosaic grid
+    const squares = container.querySelectorAll(".bg-gray-800");
+    expect(squares).toHaveLength(0);
+
+    // Should render full image
+    const fullImage = container.querySelector(".bg-cover.bg-center");
+    expect(fullImage).toBeInTheDocument();
+  });
+
+  it("removes blur from revealed squares when completionCount >= 16", () => {
+    const { container } = render(
+      <MosaicReveal
+        imageSrc={mockImageSrc}
+        completionCount={15}
+        filledSquares={1}
+      />,
+    );
+
+    // With completionCount < 16, squares should still be blurred
+    const firstSquare = container.querySelector(".bg-gray-800");
+    expect(firstSquare).toHaveStyle({
+      filter: "blur(3px)",
+    });
+  });
+
+  it("maintains aspect ratio for full image view", () => {
+    const { container } = render(
+      <MosaicReveal imageSrc={mockImageSrc} completionCount={16} />,
+    );
+
+    const fullImage = container.querySelector(".bg-cover.bg-center");
+    expect(fullImage).toHaveStyle({
+      aspectRatio: "1/1",
+    });
+  });
+
+  it("calls onComplete callback when all squares are filled", () => {
+    render(
+      <MosaicReveal
+        imageSrc={mockImageSrc}
+        filledSquares={16}
+        onComplete={mockOnComplete}
+        gridSize={4}
+      />,
+    );
+
+    // Fast-forward timers to trigger the setTimeout in useEffect
+    vi.runAllTimers();
+
+    expect(mockOnComplete).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not call onComplete when filledSquares is less than total", () => {
+    render(
+      <MosaicReveal
+        imageSrc={mockImageSrc}
+        filledSquares={15}
+        onComplete={mockOnComplete}
+        gridSize={4}
+      />,
+    );
+
+    vi.runAllTimers();
+
+    expect(mockOnComplete).not.toHaveBeenCalled();
+  });
+
+  it("does not call onComplete when onComplete prop is not provided", () => {
+    const { container } = render(
+      <MosaicReveal imageSrc={mockImageSrc} filledSquares={16} gridSize={4} />,
+    );
+
+    vi.runAllTimers();
+
+    // Should not throw an error
+    expect(container).toBeInTheDocument();
+  });
 });

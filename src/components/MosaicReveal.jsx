@@ -9,6 +9,7 @@ const MosaicReveal = ({
 }) => {
   const [revealedSquares, setRevealedSquares] = useState([]);
   const totalSquares = gridSize * gridSize;
+  const showFullImage = filledSquares >= 16;
 
   useEffect(() => {
     // Update revealed squares based on filledSquares prop
@@ -56,6 +57,21 @@ const MosaicReveal = ({
     };
   };
 
+  // If showing full image, render the complete unblurred image
+  if (showFullImage) {
+    return (
+      <div className="relative w-full max-w-md mx-auto">
+        <div
+          className="w-full rounded-lg bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${imageSrc})`,
+            aspectRatio: "1/1",
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="relative w-full max-w-md mx-auto">
       {/* Background image (full image) */}
@@ -89,6 +105,12 @@ const MosaicReveal = ({
       <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-sm">
         {filledSquares}/{totalSquares}
       </div>
+      {/* Completion count indicator */}
+      {filledSquares === totalSquares && (
+        <div className="absolute top-2 right-2 bg-blue-600/90 text-white px-2 py-1 rounded text-xs">
+          {filledSquares}/16
+        </div>
+      )}
     </div>
   );
 };
