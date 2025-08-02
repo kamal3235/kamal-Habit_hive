@@ -30,9 +30,9 @@ describe("NavBar", () => {
     expect(
       screen.getByText("Dashboard").closest("a").getAttribute("href"),
     ).toBe("/");
-      expect(screen.getByText("Reading").closest("a").getAttribute("href")).toBe(
-    "/reading",
-  );
+    expect(screen.getByText("Reading").closest("a").getAttribute("href")).toBe(
+      "/reading",
+    );
     expect(screen.getByText("Physical").closest("a").getAttribute("href")).toBe(
       "/physical",
     );

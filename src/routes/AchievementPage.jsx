@@ -442,7 +442,9 @@ const AchievementPage = ({
           {/* Hours Chart */}
           <div className="bg-gray-900 rounded-lg p-6 border border-yellow-400">
             <h3 className="text-xl font-bold mb-4">
-              {selectedCategory === "reading" ? "Daily Hours" : "Daily Duration"}
+              {selectedCategory === "reading"
+                ? "Daily Hours"
+                : "Daily Duration"}
             </h3>
             <div className="h-80">
               <Bar data={hoursChartData} options={chartOptions} />

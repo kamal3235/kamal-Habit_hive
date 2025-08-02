@@ -56,9 +56,9 @@ const WelcomeLanding = () => {
                 progress tracking both motivating and beautiful.
               </p>
               <p className="text-lg text-yellow-200">
-                Track three key areas of your life: Reading, Physical Health, and
-                Mental Health. Each category has its own mosaic that fills up as
-                you reach your weekly goals.
+                Track three key areas of your life: Reading, Physical Health,
+                and Mental Health. Each category has its own mosaic that fills
+                up as you reach your weekly goals.
               </p>
             </div>
             <div className="flex justify-center">

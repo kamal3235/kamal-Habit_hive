@@ -51,9 +51,9 @@ export const useAllHabitEntries = () => {
 
   const updateEntries = (category, newEntries) => {
     switch (category) {
-          case "reading":
-      setReadingEntries(newEntries);
-      break;
+      case "reading":
+        setReadingEntries(newEntries);
+        break;
       case "physical":
         setPhysicalEntries(newEntries);
         break;

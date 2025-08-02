@@ -17,4 +17,4 @@ const ReadingTracker = ({ entries, setEntries }) => (
   <HabitTracker entries={entries} setEntries={setEntries} {...readingConfig} />
 );
 
-export default ReadingTracker; 
+export default ReadingTracker;
