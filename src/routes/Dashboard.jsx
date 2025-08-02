@@ -276,7 +276,6 @@ const Dashboard = ({
                 <MosaicReveal
                   imageSrc={cat.image}
                   filledSquares={progress}
-                  onComplete={() => handleMosaicComplete(cat.name)}
                   gridSize={4}
                 />
               </div>
