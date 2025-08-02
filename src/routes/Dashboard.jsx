@@ -8,8 +8,8 @@ import { loadAllEntries } from "../utils/localStorage";
 
 const HABIT_CATEGORIES = [
   {
-    name: "Coding",
-    key: "coding",
+    name: "Reading",
+    key: "reading",
     image: programmingBee,
     goal: 16,
   },
@@ -32,14 +32,14 @@ const getHabitData = () => {
   try {
     const allEntries = loadAllEntries();
     return {
-      coding: allEntries.coding.map((entry) => entry.date),
+      reading: allEntries.reading.map((entry) => entry.date),
       physical: allEntries.physical.map((entry) => entry.date),
       mental: allEntries.mentalHealth.map((entry) => entry.date),
     };
   } catch (e) {
     console.error("Error loading habit data:", e);
     return {
-      coding: [],
+      reading: [],
       physical: [],
       mental: [],
     };
@@ -64,9 +64,9 @@ const getRecentActivity = () => {
     const activities = [];
 
     // Add activities from all categories
-    allEntries.coding.forEach((entry) => {
+    allEntries.reading.forEach((entry) => {
       activities.push({
-        category: "Coding",
+        category: "Reading",
         details: `${entry.value || entry.hours || 0}h session`,
         date: entry.date,
         timestamp: new Date(entry.date).getTime(),
@@ -162,7 +162,7 @@ const Dashboard = ({
 
   React.useEffect(() => {
     const updatedData = {
-      coding: entries.map((entry) => entry.date),
+      reading: entries.map((entry) => entry.date),
       physical: physicalEntries.map((entry) => entry.date),
       mental: mentalEntries.map((entry) => entry.date),
     };
@@ -171,7 +171,7 @@ const Dashboard = ({
 
     entries.forEach((entry) => {
       activities.push({
-        category: "Coding",
+        category: "Reading",
         details: `${entry.value || entry.hours || 0}h session`,
         date: entry.date,
         timestamp: new Date(entry.date).getTime(),

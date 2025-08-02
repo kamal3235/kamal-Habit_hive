@@ -30,7 +30,7 @@ const AchievementPage = ({
 }) => {
   const [timeframe, setTimeframe] = useState("week"); // week, month, year
   const [achievementData, setAchievementData] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState("coding"); // coding, physical, mental
+  const [selectedCategory, setSelectedCategory] = useState("reading"); // reading, physical, mental
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   // Immediate debug logging
@@ -66,7 +66,7 @@ const AchievementPage = ({
       // Get the appropriate entries based on selected category
       let currentEntries = [];
       switch (selectedCategory) {
-        case "coding":
+        case "reading":
           currentEntries = entries;
           break;
         case "physical":
@@ -99,7 +99,7 @@ const AchievementPage = ({
       // Calculate statistics
       let totalHours, totalSessions, averageHours;
 
-      // All trackers now use 'value' field (coding, physical, mental)
+      // All trackers now use 'value' field (reading, physical, mental)
       totalHours = filteredEntries.reduce((sum, entry) => sum + entry.value, 0);
       totalSessions = filteredEntries.length;
       averageHours =
@@ -220,7 +220,7 @@ const AchievementPage = ({
     labels: achievementData.chartData?.map((item) => item.day) || [],
     datasets: [
       {
-        label: selectedCategory === "coding" ? "Hours" : "Duration",
+        label: selectedCategory === "reading" ? "Hours" : "Duration",
         data: achievementData.chartData?.map((item) => item.hours) || [],
         backgroundColor: "#fbbf24",
         borderColor: "#f59e0b",
@@ -233,7 +233,7 @@ const AchievementPage = ({
     labels: achievementData.chartData?.map((item) => item.day) || [],
     datasets: [
       {
-        label: selectedCategory === "coding" ? "Sessions" : "Activities",
+        label: selectedCategory === "reading" ? "Sessions" : "Activities",
         data:
           achievementData.chartData?.map((item) => Math.round(item.sessions)) ||
           [], // Ensure sessions are whole numbers
@@ -290,7 +290,7 @@ const AchievementPage = ({
                     "Are you sure you want to clear all data? This will start fresh with no previous session data.",
                   )
                 ) {
-                  localStorage.removeItem("habit-hive-coding-entries");
+                  localStorage.removeItem("habit-hive-reading-entries");
                   localStorage.removeItem("habit-hive-physical-entries");
                   localStorage.removeItem("habit-hive-mental-health-entries");
                   window.location.reload();
@@ -308,7 +308,7 @@ const AchievementPage = ({
           {/* Category Selector */}
           <div className="bg-gray-900 rounded-lg p-1 border border-yellow-400">
             {[
-              { key: "coding", name: "Coding", icon: "💻" },
+              { key: "reading", name: "Reading", icon: "📚" },
               { key: "physical", name: "Physical", icon: "💪" },
               { key: "mental", name: "Mental", icon: "🧠" },
             ].map((category) => (
@@ -353,7 +353,7 @@ const AchievementPage = ({
                 {achievementData.totalHours || 0}
               </div>
               <div className="text-white">
-                {selectedCategory === "coding"
+                {selectedCategory === "reading"
                   ? "Total Hours"
                   : "Total Duration"}
               </div>
@@ -365,7 +365,7 @@ const AchievementPage = ({
                 {achievementData.totalSessions || 0}
               </div>
               <div className="text-white">
-                {selectedCategory === "coding" ? "Sessions" : "Activities"}
+                {selectedCategory === "reading" ? "Sessions" : "Activities"}
               </div>
             </div>
           </div>
@@ -375,7 +375,7 @@ const AchievementPage = ({
                 {achievementData.averageHours || 0}
               </div>
               <div className="text-white">
-                {selectedCategory === "coding"
+                {selectedCategory === "reading"
                   ? "Avg Hours/Session"
                   : "Avg Duration/Activity"}
               </div>
@@ -395,7 +395,7 @@ const AchievementPage = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div className="bg-gray-900 rounded-lg p-6 border border-yellow-400">
             <h3 className="text-xl font-bold mb-4">
-              {selectedCategory === "coding"
+              {selectedCategory === "reading"
                 ? "Hours Progress"
                 : "Duration Progress"}
             </h3>
@@ -403,7 +403,7 @@ const AchievementPage = ({
               <span>
                 {achievementData.totalHours || 0} /{" "}
                 {achievementData.goal?.hours || 0}{" "}
-                {selectedCategory === "coding" ? "hours" : "hours"}
+                {selectedCategory === "reading" ? "hours" : "hours"}
               </span>
               <span>{Math.round(achievementData.hoursProgress || 0)}%</span>
             </div>
@@ -416,7 +416,7 @@ const AchievementPage = ({
           </div>
           <div className="bg-gray-900 rounded-lg p-6 border border-yellow-400">
             <h3 className="text-xl font-bold mb-4">
-              {selectedCategory === "coding"
+              {selectedCategory === "reading"
                 ? "Sessions Progress"
                 : "Activities Progress"}
             </h3>
@@ -424,7 +424,7 @@ const AchievementPage = ({
               <span>
                 {achievementData.totalSessions || 0} /{" "}
                 {achievementData.goal?.sessions || 0}{" "}
-                {selectedCategory === "coding" ? "sessions" : "activities"}
+                {selectedCategory === "reading" ? "sessions" : "activities"}
               </span>
               <span>{Math.round(achievementData.sessionsProgress || 0)}%</span>
             </div>
@@ -442,7 +442,7 @@ const AchievementPage = ({
           {/* Hours Chart */}
           <div className="bg-gray-900 rounded-lg p-6 border border-yellow-400">
             <h3 className="text-xl font-bold mb-4">
-              {selectedCategory === "coding" ? "Daily Hours" : "Daily Duration"}
+              {selectedCategory === "reading" ? "Daily Hours" : "Daily Duration"}
             </h3>
             <div className="h-80">
               <Bar data={hoursChartData} options={chartOptions} />
@@ -452,7 +452,7 @@ const AchievementPage = ({
           {/* Sessions Chart */}
           <div className="bg-gray-900 rounded-lg p-6 border border-yellow-400">
             <h3 className="text-xl font-bold mb-4">
-              {selectedCategory === "coding"
+              {selectedCategory === "reading"
                 ? "Daily Sessions"
                 : "Daily Activities"}
             </h3>
@@ -494,7 +494,7 @@ const AchievementPage = ({
           <div className="text-center">
             <h3 className="text-2xl font-bold mb-4">💪 Keep Going!</h3>
             <p className="text-white text-lg">
-              Every coding session brings you closer to your goals. Consistency
+              Every reading session brings you closer to your goals. Consistency
               is the key to mastery!
             </p>
           </div>

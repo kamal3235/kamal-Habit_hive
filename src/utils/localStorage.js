@@ -1,5 +1,5 @@
 const STORAGE_KEYS = {
-  coding: "habit-hive-coding-entries",
+  reading: "habit-hive-reading-entries",
   physical: "habit-hive-physical-entries",
   mentalHealth: "habit-hive-mental-health-entries",
 };
@@ -50,10 +50,10 @@ export const clearEntriesFromStorage = (category) => {
 };
 
 // Category-specific convenience functions
-export const saveCodingEntries = (entries) =>
-  saveEntriesToStorage(entries, "coding");
-export const loadCodingEntries = () => loadEntriesFromStorage("coding");
-export const clearCodingEntries = () => clearEntriesFromStorage("coding");
+export const saveReadingEntries = (entries) =>
+  saveEntriesToStorage(entries, "reading");
+export const loadReadingEntries = () => loadEntriesFromStorage("reading");
+export const clearReadingEntries = () => clearEntriesFromStorage("reading");
 
 export const savePhysicalEntries = (entries) =>
   saveEntriesToStorage(entries, "physical");
@@ -70,7 +70,7 @@ export const clearMentalHealthEntries = () =>
 // Load all categories at once
 export const loadAllEntries = () => {
   return {
-    coding: loadCodingEntries(),
+    reading: loadReadingEntries(),
     physical: loadPhysicalEntries(),
     mentalHealth: loadMentalHealthEntries(),
   };
@@ -78,7 +78,7 @@ export const loadAllEntries = () => {
 
 // Clear all categories
 export const clearAllEntries = () => {
-  clearCodingEntries();
+  clearReadingEntries();
   clearPhysicalEntries();
   clearMentalHealthEntries();
 };

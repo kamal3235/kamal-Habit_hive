@@ -2,14 +2,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import Header from "./components/Header";
 import Dashboard from "./routes/Dashboard";
-import CodingTracker from "./routes/CodingTracker";
+import ReadingTracker from "./routes/ReadingTracker";
 import PhysicalTracker from "./routes/PhysicalTracker";
 import MentalHealthTracker from "./routes/MentalHealthTracker";
 import AchievementPage from "./routes/AchievementPage";
 
 function App() {
-  const [codingEntries, setCodingEntries] = useLocalStorage(
-    "habit-hive-coding-entries",
+  const [readingEntries, setReadingEntries] = useLocalStorage(
+    "habit-hive-reading-entries",
     [],
   );
   const [physicalEntries, setPhysicalEntries] = useLocalStorage(
@@ -28,13 +28,13 @@ function App() {
         <div className="flex justify-center">
           <main className="w-full max-w-4xl mx-auto p-4">
             <Routes>
-              <Route path="/" element={<Dashboard entries={codingEntries} />} />
+              <Route path="/" element={<Dashboard entries={readingEntries} />} />
               <Route
-                path="/coding"
+                path="/reading"
                 element={
-                  <CodingTracker
-                    entries={codingEntries}
-                    setEntries={setCodingEntries}
+                  <ReadingTracker
+                    entries={readingEntries}
+                    setEntries={setReadingEntries}
                   />
                 }
               />
@@ -60,7 +60,7 @@ function App() {
                 path="/achievements"
                 element={
                   <AchievementPage
-                    entries={codingEntries}
+                    entries={readingEntries}
                     physicalEntries={physicalEntries}
                     mentalEntries={mentalEntries}
                   />

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const habitPages = [
   // { name: "Home", path: "/" },
   { name: "Dashboard", path: "/" },
-  { name: "Coding", path: "/coding" },
+  { name: "Reading", path: "/reading" },
   { name: "Physical", path: "/physical" },
   { name: "Mental Health", path: "/mental" },
   { name: "Achievements", path: "/achievements" },

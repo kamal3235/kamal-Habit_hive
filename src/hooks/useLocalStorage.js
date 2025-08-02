@@ -30,8 +30,8 @@ export const useLocalStorage = (key, initialValue) => {
 };
 
 // Category-specific hooks for habit tracking
-export const useCodingEntries = () => {
-  return useLocalStorage("habit-hive-coding-entries", []);
+export const useReadingEntries = () => {
+  return useLocalStorage("habit-hive-reading-entries", []);
 };
 
 export const usePhysicalEntries = () => {
@@ -44,16 +44,16 @@ export const useMentalHealthEntries = () => {
 
 // Hook for managing all categories at once
 export const useAllHabitEntries = () => {
-  const [codingEntries, setCodingEntries] = useCodingEntries();
+  const [readingEntries, setReadingEntries] = useReadingEntries();
   const [physicalEntries, setPhysicalEntries] = usePhysicalEntries();
   const [mentalHealthEntries, setMentalHealthEntries] =
     useMentalHealthEntries();
 
   const updateEntries = (category, newEntries) => {
     switch (category) {
-      case "coding":
-        setCodingEntries(newEntries);
-        break;
+          case "reading":
+      setReadingEntries(newEntries);
+      break;
       case "physical":
         setPhysicalEntries(newEntries);
         break;
@@ -66,21 +66,21 @@ export const useAllHabitEntries = () => {
   };
 
   const getAllEntries = () => ({
-    coding: codingEntries,
+    reading: readingEntries,
     physical: physicalEntries,
     mentalHealth: mentalHealthEntries,
   });
 
   const clearAllEntries = () => {
-    setCodingEntries([]);
+    setReadingEntries([]);
     setPhysicalEntries([]);
     setMentalHealthEntries([]);
   };
 
   const getEntriesByCategory = (category) => {
     switch (category) {
-      case "coding":
-        return codingEntries;
+      case "reading":
+        return readingEntries;
       case "physical":
         return physicalEntries;
       case "mentalHealth":
@@ -93,12 +93,12 @@ export const useAllHabitEntries = () => {
 
   return {
     // Individual category data
-    codingEntries,
+    readingEntries,
     physicalEntries,
     mentalHealthEntries,
 
     // Individual category setters
-    setCodingEntries,
+    setReadingEntries,
     setPhysicalEntries,
     setMentalHealthEntries,
 

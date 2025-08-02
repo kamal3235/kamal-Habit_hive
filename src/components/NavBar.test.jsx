@@ -14,7 +14,7 @@ describe("NavBar", () => {
 
     // Check that each link exists in the DOM
     expect(screen.getByText("Dashboard")).not.toBeNull();
-    expect(screen.getByText("Coding")).not.toBeNull();
+    expect(screen.getByText("Reading")).not.toBeNull();
     expect(screen.getByText("Physical")).not.toBeNull();
     expect(screen.getByText("Mental Health")).not.toBeNull();
   });
@@ -30,9 +30,9 @@ describe("NavBar", () => {
     expect(
       screen.getByText("Dashboard").closest("a").getAttribute("href"),
     ).toBe("/");
-    expect(screen.getByText("Coding").closest("a").getAttribute("href")).toBe(
-      "/coding",
-    );
+      expect(screen.getByText("Reading").closest("a").getAttribute("href")).toBe(
+    "/reading",
+  );
     expect(screen.getByText("Physical").closest("a").getAttribute("href")).toBe(
       "/physical",
     );
