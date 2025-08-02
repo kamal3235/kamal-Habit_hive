@@ -4,65 +4,49 @@ import WelcomeLanding from "../components/WelcomeLanding";
 import programmingBee from "../assets/programmingBee.jpg";
 import flashdanceBee from "../assets/flashdanceBee.jpg";
 import meditatingBee from "../assets/meditatingBee.jpg";
-
-// This Dashboard page summarizes the user's habit data collected from other pages.
-// For this example, we'll use localStorage to simulate collected data from other pages.
-// In a real app, you might fetch this from a backend or a global state.
+import { loadAllEntries } from "../utils/localStorage";
 
 const HABIT_CATEGORIES = [
   {
     name: "Coding",
     key: "coding",
     image: programmingBee,
-    goal: 16, // Weekly goal: 16 sessions = all 16 squares filled in MosaicReveal
+    goal: 16,
   },
   {
     name: "Physical Health",
     key: "physical",
     image: flashdanceBee,
-    goal: 16, // Weekly goal: 16 activities = all 16 squares filled in MosaicReveal
+    goal: 16,
   },
   {
     name: "Mental Health",
     key: "mental",
     image: meditatingBee,
-    goal: 16, // Weekly goal: 16 activities = all 16 squares filled in MosaicReveal
+    goal: 16,
   },
 ];
 
-// Helper to get habit data from localStorage (or mock data if not present)
-function getHabitData() {
-  // Example structure: { coding: [timestamp, ...], physical: [...], mental: [...] }
-  let data = {};
+// FIXED: Regular function (React.memo is for components, not functions)
+const getHabitData = () => {
   try {
-    // Check for the actual localStorage key being used
-    const stored = localStorage.getItem("habit-hive-entries");
-    //console.log("🗄️ localStorage data:", stored);
-    if (stored) {
-      const entries = JSON.parse(stored);
-      //console.log("📋 Parsed entries:", entries);
-      // Convert the entries array to the expected format
-      data = {
-        coding: entries.map((entry) => entry.date), // Use date as timestamp for coding entries
-        physical: [], // Physical tracker not implemented yet
-        mental: [], // Mental health tracker not implemented yet
-      };
-      //console.log("🔄 Converted data:", data);
-    }
+    const allEntries = loadAllEntries();
+    return {
+      coding: allEntries.coding.map((entry) => entry.date),
+      physical: allEntries.physical.map((entry) => entry.date),
+      mental: allEntries.mentalHealth.map((entry) => entry.date),
+    };
   } catch (e) {
-    console.error("❌ Error reading localStorage:", e);
-    // fallback to empty
-    data = {};
+    console.error("Error loading habit data:", e);
+    return {
+      coding: [],
+      physical: [],
+      mental: [],
+    };
   }
-  // Ensure all categories exist
-  HABIT_CATEGORIES.forEach((cat) => {
-    if (!Array.isArray(data[cat.key])) data[cat.key] = [];
-  });
-  return data;
-}
+};
 
-// Helper to calculate 7-day totals for a category
-function getSevenDayTotal(timestamps) {
+const getSevenDayTotal = (timestamps) => {
   if (!Array.isArray(timestamps)) return 0;
 
   const sevenDaysAgo = new Date();
@@ -72,27 +56,91 @@ function getSevenDayTotal(timestamps) {
     const entryDate = new Date(timestamp);
     return entryDate >= sevenDaysAgo;
   }).length;
-}
+};
 
-const Dashboard = ({ entries = [] }) => {
-  const [habitData, setHabitData] = React.useState(getHabitData());
+const getRecentActivity = () => {
+  try {
+    const allEntries = loadAllEntries();
+    const activities = [];
 
-  // Function to update habit data from localStorage
+    // Add activities from all categories
+    allEntries.coding.forEach((entry) => {
+      activities.push({
+        category: "Coding",
+        details: `${entry.value || entry.hours || 0}h session`,
+        date: entry.date,
+        timestamp: new Date(entry.date).getTime(),
+      });
+    });
+
+    allEntries.physical.forEach((entry) => {
+      activities.push({
+        category: "Physical Health",
+        details: `${entry.value || 0}h activity`,
+        date: entry.date,
+        timestamp: new Date(entry.date).getTime(),
+      });
+    });
+
+    allEntries.mentalHealth.forEach((entry) => {
+      activities.push({
+        category: "Mental Health",
+        details: `${entry.value || 0}h session`,
+        date: entry.date,
+        timestamp: new Date(entry.date).getTime(),
+      });
+    });
+
+    const result = activities
+      .sort((a, b) => b.timestamp - a.timestamp)
+      .slice(0, 10);
+    return result;
+  } catch (error) {
+    console.error("Error getting recent activity:", error);
+    return [];
+  }
+};
+
+const Dashboard = ({
+  entries = [],
+  physicalEntries = [],
+  mentalEntries = [],
+}) => {
+  const [habitData, setHabitData] = React.useState(() => getHabitData());
+  const [recentActivity, setRecentActivity] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  // OPTIMIZED: Memoized update function to prevent unnecessary re-creations
   const updateHabitData = React.useCallback(() => {
-    //console.log("🔄 Updating habit data from localStorage...");
-    const newData = getHabitData();
-    //console.log("📊 New habit data:", newData);
-    setHabitData(newData);
-  }, []);
+    if (isLoading) return; // Prevent multiple simultaneous updates
 
-  // Listen for changes in localStorage (e.g., from other tabs/pages)
+    setIsLoading(true);
+    try {
+      const newData = getHabitData();
+      const activity = getRecentActivity();
+
+      setHabitData(newData);
+      setRecentActivity(activity);
+    } catch (error) {
+      console.error("Error updating habit data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [isLoading]);
+
+  // OPTIMIZED: Manual refresh only - removed aggressive polling
+  const handleManualRefresh = React.useCallback(() => {
+    updateHabitData();
+  }, [updateHabitData]);
+
+  // Listen for storage events from other tabs
   React.useEffect(() => {
     const onStorage = () => updateHabitData();
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
   }, [updateHabitData]);
 
-  // Also listen for custom events (for same-tab updates)
+  // Listen for custom habit update events
   React.useEffect(() => {
     const onCustomStorage = () => updateHabitData();
     window.addEventListener("habitDataUpdated", onCustomStorage);
@@ -100,44 +148,82 @@ const Dashboard = ({ entries = [] }) => {
       window.removeEventListener("habitDataUpdated", onCustomStorage);
   }, [updateHabitData]);
 
-  // Update habitData when entries prop changes (for immediate updates)
+  // OPTIMIZED: Only update when props actually change, with deep comparison
+  const propsDataString = React.useMemo(() => {
+    return JSON.stringify({
+      entries: entries.map((e) => ({
+        date: e.date,
+        value: e.value || e.hours,
+      })),
+      physical: physicalEntries.map((e) => ({ date: e.date, value: e.value })),
+      mental: mentalEntries.map((e) => ({ date: e.date, value: e.value })),
+    });
+  }, [entries, physicalEntries, mentalEntries]);
+
   React.useEffect(() => {
-    console.log("📝 Entries prop changed:", entries.length, "entries");
     const updatedData = {
       coding: entries.map((entry) => entry.date),
-      physical: [], // Physical tracker not implemented yet
-      mental: [], // Mental health tracker not implemented yet
+      physical: physicalEntries.map((entry) => entry.date),
+      mental: mentalEntries.map((entry) => entry.date),
     };
-    //console.log("🔄 Setting habit data from entries:", updatedData);
+
+    const activities = [];
+
+    entries.forEach((entry) => {
+      activities.push({
+        category: "Coding",
+        details: `${entry.value || entry.hours || 0}h session`,
+        date: entry.date,
+        timestamp: new Date(entry.date).getTime(),
+      });
+    });
+
+    physicalEntries.forEach((entry) => {
+      activities.push({
+        category: "Physical Health",
+        details: `${entry.value || 0}h activity`,
+        date: entry.date,
+        timestamp: new Date(entry.date).getTime(),
+      });
+    });
+
+    mentalEntries.forEach((entry) => {
+      activities.push({
+        category: "Mental Health",
+        details: `${entry.value || 0}h session`,
+        date: entry.date,
+        timestamp: new Date(entry.date).getTime(),
+      });
+    });
+
+    const sortedActivities = activities
+      .sort((a, b) => b.timestamp - a.timestamp)
+      .slice(0, 10);
+
     setHabitData(updatedData);
-  }, [entries]);
+    setRecentActivity(sortedActivities);
+  }, [propsDataString]); // OPTIMIZED: Only re-run when stringified props actually change
 
-  // Set up interval to check for localStorage changes (fallback)
+  // OPTIMIZED: Initial load only, no polling
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      updateHabitData();
-    }, 1000); // Check every second
+    updateHabitData();
+  }, []); // Empty dependency array - only run once on mount
 
-    return () => clearInterval(interval);
-  }, [updateHabitData]);
+  // OPTIMIZED: Memoized calculations to prevent unnecessary re-renders
+  const sevenDayTotals = React.useMemo(() => {
+    return HABIT_CATEGORIES.map((cat) => {
+      const total = getSevenDayTotal(habitData[cat.key]);
+      return {
+        ...cat,
+        total: total,
+      };
+    });
+  }, [habitData]);
 
-  // Calculate 7-day totals for each category
-  const sevenDayTotals = HABIT_CATEGORIES.map((cat) => {
-    const total = getSevenDayTotal(habitData[cat.key]);
-    //console.log(`📊 ${cat.name}: ${total} entries in last 7 days`);
-    return {
-      ...cat,
-      total: total,
-    };
-  });
-
-  // Calculate summary stats
-  const totalActions = sevenDayTotals.reduce((sum, cat) => sum + cat.total, 0);
-
-  const handleMosaicComplete = (categoryName) => {
-    //console.log(`${categoryName} goal completed!`);
-    // You could add celebration logic here
-  };
+  const totalActions = React.useMemo(() => {
+    const total = sevenDayTotals.reduce((sum, cat) => sum + cat.total, 0);
+    return total;
+  }, [sevenDayTotals]);
 
   // Show welcome landing page if no progress
   if (totalActions === 0) {
@@ -151,10 +237,15 @@ const Dashboard = ({ entries = [] }) => {
           Your Habit Dashboard
         </h1>
         <button
-          onClick={updateHabitData}
-          className="px-4 py-2 bg-yellow-400 text-black rounded-lg hover:bg-yellow-300 transition-colors"
+          onClick={handleManualRefresh}
+          disabled={isLoading}
+          className={`px-4 py-2 rounded-lg transition-colors ${
+            isLoading
+              ? "bg-gray-400 text-gray-600 cursor-not-allowed"
+              : "bg-yellow-400 text-black hover:bg-yellow-300"
+          }`}
         >
-          🔄 Refresh
+          {isLoading ? "🔄 Loading..." : "🔄 Refresh"}
         </button>
       </div>
 
@@ -185,7 +276,6 @@ const Dashboard = ({ entries = [] }) => {
                 <MosaicReveal
                   imageSrc={cat.image}
                   filledSquares={progress}
-                  onComplete={() => handleMosaicComplete(cat.name)}
                   gridSize={4}
                 />
               </div>
@@ -261,20 +351,20 @@ const Dashboard = ({ entries = [] }) => {
               </tr>
             </thead>
             <tbody>
-              {/* Show coding entries */}
-              {entries.slice(0, 10).map((entry, idx) => (
+              {recentActivity.map((activity, idx) => (
                 <tr
-                  key={`coding-${idx}`}
+                  key={`activity-${idx}`}
                   className="border-b border-yellow-900"
                 >
-                  <td className="p-2 text-yellow-200">Coding</td>
-                  <td className="p-2 text-white">{entry.hours}h session</td>
+                  <td className="p-2 text-yellow-200">{activity.category}</td>
+                  <td className="p-2 text-white">{activity.details}</td>
                   <td className="p-2 text-white">
-                    {new Date(entry.date).toLocaleDateString()}
+                    {new Date(activity.date).toLocaleDateString()}
                   </td>
                 </tr>
               ))}
-              {entries.length === 0 && (
+
+              {recentActivity.length === 0 && (
                 <tr>
                   <td colSpan={3} className="p-4 text-center text-yellow-500">
                     No activity logged yet. Start tracking your habits!
